@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -7,14 +7,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  product: any;
-  constructor(private router: Router) { }
+  product: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.product = history.state;
-    if (this.product.navigationId === 1){
-      this.router.navigate(['/home']);
-    }
+    this.route.queryParams.subscribe(params => {
+      this.product = params.productId;
+    });
+
   }
 
 }

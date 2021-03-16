@@ -1,7 +1,44 @@
-<p>home works!</p>
 
-<ul>
-  <li *ngFor="let item of results; let i = index">
-     {{item.title}} <button (click)="toProduct(item)">product card</button>
-  </li>
-</ul>
+<div class="container">
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let slide of slider; let index=index ;let isFirst = first"  class="carousel-item" [ngClass]="{active: isFirst}">
+        <img src="{{slide.src}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <a  *ngFor="let item of results; let i = index">
+          <div class="col" >
+            <div class="card w-100">
+              <img class="card-img-top" src="{{item.imgHd}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">{{item.price | currency:'COP'}}</p>
+                <button class="btn btn-primary" (click)="toProduct(item)" >Go to info</button>
+                <button class="btn btn-secondary" (click)="toProduct(item)" >Add to car</button>
+              </div>
+            </div>
+          </div>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,3 +1,11 @@
-<p>navbar works!</p>
-<input [(ngModel)]="search" (keydown)="onPressEnter($event)">Búsqueda de producto
-<button (click)="makeSearch()"> jejeje</button>
+<nav class="navbar navbar-dark bg-dark  shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand">Mercadolibre by Daniel Rivera</a>
+    <form class="d-flex">
+      <input  [(ngModel)]="search" name="busqueda"  class="form-control me-2" type="search" placeholder="Products search" aria-label="Search">
+      <button (click)="makeSearch()" class="btn btn-outline-info" type="submit">Search</button>
+    </form>
+    <a ><img src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.14.2/mercadolibre/logo__small@2x.png"></a>
+
+  </div>
+</nav>

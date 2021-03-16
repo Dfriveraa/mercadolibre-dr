@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
     this.navbarService.makeSearch(this.search);
   }
-
+  //replaced by bootstrap form
   onPressEnter(event): void {
     if (event.keyCode === 13) {
       this.makeSearch();
