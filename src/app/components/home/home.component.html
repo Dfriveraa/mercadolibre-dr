@@ -1,1 +1,7 @@
 <p>home works!</p>
+
+<ul>
+  <li *ngFor="let item of results; let i = index">
+     {{item.title}} <button (click)="toProduct(item)">product card</button>
+  </li>
+</ul>
