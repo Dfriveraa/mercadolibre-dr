@@ -25,17 +25,19 @@ export class HomeComponent implements OnInit {
   ];
   results: any[] = [];
   itemSearch: string;
+  offset: number;
   constructor(private mercadolibreService: MercadolibreService, private navbarService: NavbarService, private router: Router) {
     this.itemSearch = this.mercadolibreService.search;
+    this.offset = 0;
   }
   ngOnInit(): void {
     this.navbarService.change.subscribe(newsearch => {
       this.itemSearch = newsearch;
+      this.offset = 0;
       this.search(this.itemSearch, 0);
     });
     if (this.itemSearch !== undefined){
       this.search(this.itemSearch, 0);
-
     }
   }
   search(item, offset): void{
@@ -43,7 +45,6 @@ export class HomeComponent implements OnInit {
     this.mercadolibreService.getProducts(item , offset).subscribe(data => {
       data.results.map(product => {
         product.imgHd = product.thumbnail.replace("-I","-V");
-
         this.mercadolibreService.getSellerName(product.seller.id).subscribe(name => {
           product.seller_name = name.nickname;
         });
@@ -53,8 +54,20 @@ export class HomeComponent implements OnInit {
 
     });
   }
-  toProduct(product): void{
-    this.router.navigate(['/product'], {queryParams: {productId: 'MCO611178585'}});
+  toProduct(productID): void{
+    this.router.navigate(['/product'], {queryParams: {productId: productID }});
+  }
+  nextPage(): void{
+    this.offset += 1;
+    this.search(this.itemSearch, this.offset);
+  }
+  previousPage(): void{
+    this.offset -= 1;
+    this.search(this.itemSearch, this.offset);
+  }
+  toPage(pageNumber): void{
+    this.offset = pageNumber;
+    this.search(this.itemSearch, this.offset);
   }
 
 

@@ -28,15 +28,29 @@
                 <h5 class="card-title">{{item.title}}</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <p class="card-text">{{item.price | currency:'COP'}}</p>
-                <button class="btn btn-primary" (click)="toProduct(item)" >Go to info</button>
+                <button class="btn btn-primary" (click)="toProduct(item.id)" >Go to info</button>
                 <button class="btn btn-secondary" (click)="toProduct(item)" >Add to car</button>
               </div>
             </div>
           </div>
         </a>
-
-
       </div>
+
+      <nav aria-label="pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [ngClass]="{disabled: offset<1}">
+            <a class="page-link" (click)="previousPage()" tabindex="-1">Previous</a>
+          </li>
+          <li *ngIf="offset>0" class="page-item"><a class="page-link" (click)="toPage(offset-1)">{{offset}}</a></li>
+          <li class="page-item active"><a class="page-link">{{offset+1}}</a></li>
+          <li class="page-item"><a class="page-link" (click)="toPage(offset+1)">{{offset+2}}</a></li>
+          <li *ngIf="offset<1" class="page-item"><a class="page-link" (click)="toPage(offset+2)">{{offset+3}}</a></li>
+          <li class="page-item">
+            <a class="page-link" (click)="nextPage()">Next</a>
+          </li>
+        </ul>
+      </nav>
+
     </div>
   </div>
 
