@@ -25,13 +25,13 @@ export class HomeComponent implements OnInit {
   results: any[] = [];
   itemSearch: string;
   offset: number;
-  // tslint:disable-next-line:max-line-length
   constructor(private mercadolibreService: MercadolibreService, private route: ActivatedRoute, private router: Router) {
     this.offset = 0;
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.itemSearch = params.search;
+      this.offset = 0;
       this.search(this.itemSearch, 0);
     });
 

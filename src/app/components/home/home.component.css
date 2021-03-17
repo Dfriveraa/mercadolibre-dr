@@ -6,3 +6,10 @@
   margin-right: -15px;
   margin-left: -15px;
 }
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #211e1e;
+  cursor: auto;
+  border-color: #7391a8;
+
+}
