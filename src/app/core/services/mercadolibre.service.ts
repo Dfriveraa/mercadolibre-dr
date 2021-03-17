@@ -31,4 +31,7 @@ export class MercadolibreService {
   getProduct(productId): Observable<any>{
     return  this.http.get<any>(this.env.apiProductMercadolibre + productId);
   }
+  getDescription(productId): Observable<any>{
+    return this.http.get<any>(this.env.apiProductMercadolibre + productId + '/descriptions');
+  }
 }
