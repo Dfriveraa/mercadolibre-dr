@@ -27,4 +27,8 @@ export class MercadolibreService {
   getSellerName(seller): Observable<any>{
     return this.http.get<any>(this.env.apiUserMercadolibre + seller);
   }
+
+  getProduct(productId): Observable<any>{
+    return  this.http.get<any>(this.env.apiProductMercadolibre + productId);
+  }
 }
