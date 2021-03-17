@@ -1,11 +1,12 @@
-
 <div class="container">
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div *ngFor="let slide of slider; let index=index ;let isFirst = first"  class="carousel-item" [ngClass]="{active: isFirst}">
-        <img src="{{slide.src}}" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-        </div>
+       <a [routerLink]="['/home']" [queryParams]="{search: slide.search}">
+         <img src="{{slide.src}}"  class="d-block w-100"  alt="">
+         <div class="carousel-caption d-none d-md-block">
+         </div>
+       </a>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
@@ -17,6 +18,8 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+
+
   <div class="container">
     <div class="row">
       <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -36,6 +39,7 @@
         </a>
       </div>
 
+<!--      Esta paginación sólo yo sé como funciona -->
       <nav aria-label="pagination">
         <ul class="pagination justify-content-center">
           <li class="page-item" [ngClass]="{disabled: offset<1}">

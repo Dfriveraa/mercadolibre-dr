@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MercadolibreService} from '../../core/services/mercadolibre.service';
-import {Router} from '@angular/router';
-import {NavbarService} from '../navbar/navbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -26,32 +25,28 @@ export class HomeComponent implements OnInit {
   results: any[] = [];
   itemSearch: string;
   offset: number;
-  constructor(private mercadolibreService: MercadolibreService, private navbarService: NavbarService, private router: Router) {
-    this.itemSearch = this.mercadolibreService.search;
+  // tslint:disable-next-line:max-line-length
+  constructor(private mercadolibreService: MercadolibreService, private route: ActivatedRoute, private router: Router) {
     this.offset = 0;
   }
   ngOnInit(): void {
-    this.navbarService.change.subscribe(newsearch => {
-      this.itemSearch = newsearch;
-      this.offset = 0;
+    this.route.queryParams.subscribe(params => {
+      this.itemSearch = params.search;
       this.search(this.itemSearch, 0);
     });
-    if (this.itemSearch !== undefined){
-      this.search(this.itemSearch, 0);
-    }
+
   }
   search(item, offset): void{
     this.results = [];
     this.mercadolibreService.getProducts(item , offset).subscribe(data => {
       data.results.map(product => {
-        product.imgHd = product.thumbnail.replace("-I","-V");
+        product.imgHd = product.thumbnail.replace('-I', '-V');
         this.mercadolibreService.getSellerName(product.seller.id).subscribe(name => {
           product.seller_name = name.nickname;
         });
         this.results.push(product);
       });
       console.log(this.results);
-
     });
   }
   toProduct(productID): void{

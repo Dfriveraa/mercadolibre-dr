@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MercadolibreService} from '../../core/services/mercadolibre.service';
 import {Router} from '@angular/router';
-import {NavbarService} from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +10,13 @@ import {NavbarService} from './navbar.service';
 
 export class NavbarComponent implements OnInit {
   search: string;
-  constructor(private mercadolibreService: MercadolibreService, private navbarService: NavbarService, private router: Router) {
+  constructor(private mercadolibreService: MercadolibreService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.mercadolibreService.search = this.search;
-
   }
   makeSearch(): void {
-    this.mercadolibreService.search = this.search;
-    this.router.navigate(['/home']);
-    this.navbarService.makeSearch(this.search);
+    this.router.navigate(['/home'], {queryParams: {search: this.search }});
   }
   //replaced by bootstrap form
   onPressEnter(event): void {
