@@ -15,7 +15,8 @@ export class ProductComponent implements OnInit {
     pictures: [{url: ''}],
     descriptions: [{plain_text: ''}],
     seller: '',
-    available_quantity: 0
+    available_quantity: 0,
+    shipping: false
   };
   constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService) { }
 
@@ -37,12 +38,13 @@ export class ProductComponent implements OnInit {
   }
   setInfo(productId): void {
     this.mercadolibreService.getProduct(productId).subscribe( product => {
-      const { title, price, pictures, available_quantity} = product;
+      const { title, price, pictures, available_quantity, shipping} = product;
       this.setSeller(product.seller_id);
       this.product.title = title;
       this.product.price = price;
       this.product.pictures = pictures;
       this.product.available_quantity = available_quantity;
+      this.product.shipping = shipping.free_shipping;
     });
   }
 
