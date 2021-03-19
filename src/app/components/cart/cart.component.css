@@ -1,0 +1,16 @@
+.container{
+  margin-top: 5%;
+}
+
+/* setting the text-align property to center*/
+td {
+  text-align:center;
+
+}
+.pointer{
+  cursor: pointer;
+
+}
+.form-group{
+  margin-bottom: 16px;
+}

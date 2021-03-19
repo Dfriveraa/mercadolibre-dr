@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MercadolibreService} from '../../core/services/mercadolibre.service';
+import {CartService} from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -10,6 +11,7 @@ import {MercadolibreService} from '../../core/services/mercadolibre.service';
 
 export class ProductComponent implements OnInit {
   product = {
+    id: '',
     title: '',
     price: 0,
     pictures: [{url: ''}],
@@ -18,10 +20,11 @@ export class ProductComponent implements OnInit {
     available_quantity: 0,
     shipping: false
   };
-  constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService) { }
+  constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      this.product.id = params.productId;
       this.setInfo(params.productId);
       this.setDescription(params.productId);
     });
@@ -46,6 +49,9 @@ export class ProductComponent implements OnInit {
       this.product.available_quantity = available_quantity;
       this.product.shipping = shipping.free_shipping;
     });
+  }
+  addToCart(): void {
+    this.cartService.cartShopping.push(this.product.id);
   }
 
 }

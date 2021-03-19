@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MercadolibreService} from '../../core/services/mercadolibre.service';
+import {CartService} from '../../core/services/cart.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -11,26 +12,32 @@ export class HomeComponent implements OnInit {
   slider = [
     {
       src: 'https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mco-home-desktop-slider-picture-9da47314-157a-4270-81b1-8ec999313eca.jpg',
-      search: 'Licores'
+      search: 'Bebidas alcoholicas'
     },
     {
       src: 'https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mco-home-desktop-slider-picture-e8adad68-f714-4c67-b37b-0c95a1432307.jpg',
-      search: 'Electrodomésticos'
+      search: 'Tecnología'
     },
     {
       src: 'https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mco-home-desktop-slider-picture-f2452add-8bf6-4852-9cc1-10b5b746c329.jpg',
-      search: 'Gimnasia'
+      search: 'Deportes'
     }
   ];
   results: any[] = [];
   itemSearch: string;
   offset: number;
-  constructor(private mercadolibreService: MercadolibreService, private route: ActivatedRoute, private router: Router) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private mercadolibreService: MercadolibreService, private route: ActivatedRoute, private router: Router, private cartService: CartService) {
     this.offset = 0;
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.itemSearch = params.search;
+      if (params.search !== undefined){
+        this.itemSearch = params.search;
+      }
+      else {
+        this.itemSearch = this.slider[Math.floor(Math.random() * this.slider.length)].search;
+      }
       this.offset = 0;
       this.search(this.itemSearch, 0);
     });
@@ -64,7 +71,9 @@ export class HomeComponent implements OnInit {
     this.offset = pageNumber;
     this.search(this.itemSearch, this.offset);
   }
-
+  addToCart(itemId): void {
+    this.cartService.cartShopping.push(itemId);
+  }
 
 
 }
