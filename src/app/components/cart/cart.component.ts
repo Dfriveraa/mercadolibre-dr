@@ -24,14 +24,13 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
   removeItem(itemId): void{
-   this.cartService.cartShopping = this.cartService.cartShopping.filter( item => {
-     return item !== itemId;
-   });
-   this.items = this.items.filter( item => {
+    this.cartService.removeItem(itemId);
+    this.items = this.items.filter( item => {
       return item.id !== itemId;
     });
    this.calculeTotal();
   }
+  
   calculeTotal(): void {
     this.total = 0;
     this.items.map( item => {

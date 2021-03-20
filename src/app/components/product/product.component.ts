@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
     });
   }
   addToCart(): void {
-    this.cartService.cartShopping.push(this.product.id);
+    this.cartService.addItem(this.product.id);
   }
 
 }

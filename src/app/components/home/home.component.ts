@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
         });
         this.results.push(product);
       });
-      console.log(this.results);
     });
   }
   toProduct(productID): void{
@@ -72,7 +71,7 @@ export class HomeComponent implements OnInit {
     this.search(this.itemSearch, this.offset);
   }
   addToCart(itemId): void {
-    this.cartService.cartShopping.push(itemId);
+    this.cartService.addItem(itemId);
   }
 
 

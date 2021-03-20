@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MercadolibreService} from '../../core/services/mercadolibre.service';
 import {Router} from '@angular/router';
+import {CartService} from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 
 export class NavbarComponent implements OnInit {
   search: string;
-  constructor(private mercadolibreService: MercadolibreService, private router: Router) {
+  constructor(public cartService: CartService, private router: Router) {
   }
 
   ngOnInit(): void {
