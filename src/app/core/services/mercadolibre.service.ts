@@ -16,20 +16,20 @@ export class MercadolibreService {
   }
   getProducts(item, offset): Observable<any>{
     if (offset){
-        return this.http.get<any>(this.env.apiMercadolibre + 'q=' + item + '&offset=' + offset);
+        return this.http.get<any>(this.env.APIPRODUCTS + 'q=' + item + '&offset=' + (offset*50));
     }
     else {
-      return this.http.get<any>(this.env.apiMercadolibre + 'q=' + item);
+      return this.http.get<any>(this.env.APIPRODUCTS + 'q=' + item);
     }
   }
   getSellerName(seller): Observable<any>{
-    return this.http.get<any>(this.env.apiUserMercadolibre + seller);
+    return this.http.get<any>(this.env.APIUSERS + seller);
   }
 
   getProduct(productId): Observable<any>{
-    return  this.http.get<any>(this.env.apiProductMercadolibre + productId);
+    return  this.http.get<any>(this.env.APIPRODUCT + productId);
   }
   getDescription(productId): Observable<any>{
-    return this.http.get<any>(this.env.apiProductMercadolibre + productId + '/descriptions');
+    return this.http.get<any>(this.env.APIPRODUCT + productId + '/descriptions');
   }
 }
