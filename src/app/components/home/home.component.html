@@ -26,7 +26,7 @@
 
             <div class="card h-100">
               <a [routerLink]="['/product']" [queryParams]="{productId: item.id}">
-                <img  class="card-img-top img-card" src="{{item.thumbnail}}" alt="Card image cap">
+                <img  class="card-img-top img-card" src="{{item.imgHd}}" alt="Card image cap">
               </a>
               <div class="card-body product-body">
                 <a class="a-title" [routerLink]="['/product']" [queryParams]="{productId: item.id}">
