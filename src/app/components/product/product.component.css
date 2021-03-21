@@ -4,3 +4,17 @@
 .form-group{
   margin-bottom: 16px;
 }
+.discount{
+  color: green;
+  vertical-align: middle;
+  font-size: 22px;
+}
+.product-form-price{
+  font-size: 35px;
+  vertical-align: middle;
+  font: bold;
+}
+
+.shipping{
+  color: green;
+}

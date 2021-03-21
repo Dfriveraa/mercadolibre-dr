@@ -18,7 +18,9 @@ export class ProductComponent implements OnInit {
     descriptions: [{plain_text: ''}],
     seller: '',
     available_quantity: 0,
-    shipping: false
+    shipping: false,
+    original_price: null,
+    discount: null
   };
   constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService, private cartService: CartService) { }
 
@@ -41,17 +43,24 @@ export class ProductComponent implements OnInit {
   }
   setInfo(productId): void {
     this.mercadolibreService.getProduct(productId).subscribe( product => {
-      const { title, price, pictures, available_quantity, shipping} = product;
+      const { title, price, pictures, available_quantity, shipping, original_price} = product;
       this.setSeller(product.seller_id);
       this.product.title = title;
       this.product.price = price;
       this.product.pictures = pictures;
       this.product.available_quantity = available_quantity;
       this.product.shipping = shipping.free_shipping;
+      if (original_price !== null){
+        this.product.discount = this.calculateDiscount(price, original_price);
+        console.log(this.calculateDiscount(price,original_price));  
+      }
     });
   }
   addToCart(): void {
     this.cartService.addItem(this.product.id);
   }
-
+  calculateDiscount(price, originalPrice){
+    let discount = 100 - (price*100)/originalPrice
+    return Math.round(discount);
+  };
 }
