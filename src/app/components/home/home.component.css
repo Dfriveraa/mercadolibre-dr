@@ -15,6 +15,9 @@
 }
 .btn {
   margin-left: 5px;
+  display: flex;
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .a-title {
@@ -25,3 +28,14 @@
 .shipping{
   color:green;
 }
+
+.img-card{
+  height: 200px;
+  object-fit: contain;
+}
+
+.product-body{
+  display: flex;
+  flex-flow: column;
+}
+
