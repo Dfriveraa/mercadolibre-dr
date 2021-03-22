@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
     original_price: null,
     discount: null
   };
-  constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService, private cartService: CartService) { }
+  constructor(private route: ActivatedRoute, private mercadolibreService: MercadolibreService, public cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -52,15 +52,14 @@ export class ProductComponent implements OnInit {
       this.product.shipping = shipping.free_shipping;
       if (original_price !== null){
         this.product.discount = this.calculateDiscount(price, original_price);
-        console.log(this.calculateDiscount(price,original_price));  
       }
     });
   }
   addToCart(): void {
     this.cartService.addItem(this.product.id);
   }
-  calculateDiscount(price, originalPrice){
-    let discount = 100 - (price*100)/originalPrice
-    return Math.round(discount);
-  };
+  calculateDiscount(price, originalPrice): number{
+    const discount = 100 - (price * 100) / originalPrice;
+    return Math.floor(discount);
+  }
 }

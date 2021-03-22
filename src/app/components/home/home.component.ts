@@ -50,6 +50,9 @@ export class HomeComponent implements OnInit {
         product.imgHd = product.thumbnail.replace('-I', '-V');
         this.mercadolibreService.getSellerName(product.seller.id).subscribe(name => {
           product.seller_name = name.nickname;
+          if (product.original_price !== null){
+            product.discount = this.calculateDiscount(product.price, product.original_price);
+          }
         });
         this.results.push(product);
       });
@@ -73,6 +76,9 @@ export class HomeComponent implements OnInit {
   addToCart(itemId): void {
     this.cartService.addItem(itemId);
   }
-
+  calculateDiscount(price, originalPrice): number{
+    const discount = 100 - (price * 100) / originalPrice;
+    return Math.floor(discount);
+  }
 
 }
